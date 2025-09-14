@@ -26,26 +26,21 @@
     @keyframes fall{0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}}
     @media (max-width:520px){h1{font-size:40px} .card{padding:20px;padding-top:60px}}
 
-    /* nút nhạc màu đen nhỏ */
+    /* nút nhạc */
     #music-btn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
+      bottom: 15px;
+      right: 15px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       border: none;
       background-color: black;
       color: white;
-      font-size: 20px;
+      font-size: 6px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
       z-index: 9999;
-    }
-    #music-btn:hover {
-      transform: scale(1.1);
-      background-color: #333;
+      padding: 0;
     }
   </style>
 </head>
@@ -55,50 +50,15 @@
     <p class="lead">Chúc toàn thể các bạn nữ trong lớp 9B và cô giáo chủ nhiệm có một ngày 20/10 thật nhiều niềm vui, sức khỏe và hạnh phúc! 🌹</p>
   </div>
 
-  <!-- file nhạc -->
   <audio id="bg-music" src="nhac.mp3" loop></audio>
   <button id="music-btn">🎵</button>
 
   <script>
-    // auto full screen ngay khi tải
-    window.addEventListener('load', async ()=>{
-      try{
-        if(!document.fullscreenElement) await document.documentElement.requestFullscreen();
-      }catch(e){console.log('Không thể tự động full màn hình:', e.message)}
-    });
-
-    // điều khiển nhạc bằng nút
     const music = document.getElementById('bg-music');
     const btn = document.getElementById('music-btn');
     let playing = false;
 
     btn.addEventListener('click', ()=>{
-      if(playing){
-        music.pause();
-        btn.textContent = "🎵";
-      }else{
+      if(!playing){
         music.play();
-        btn.textContent = "🔊";
-      }
-      playing = !playing;
-    });
-
-    // generate flowers
-    function makeFlower(){
-      const f = document.createElement('div');
-      f.className = 'flower';
-      const size = Math.random()*16 + 12;
-      f.style.width = size+'px'; f.style.height = size+'px';
-      f.style.left = Math.random()*100+'%';
-      f.style.top = (Math.random()*-20)+'%';
-      f.style.opacity = (0.6 + Math.random()*0.4);
-      f.style.transform = 'rotate('+ (Math.random()*360) +'deg)';
-      const dur = 6 + Math.random()*8;
-      f.style.animation = `fall ${dur}s linear forwards`;
-      document.body.appendChild(f);
-      setTimeout(()=>f.remove(), (dur+1)*1000);
-    }
-    setInterval(makeFlower, 600);
-  </script>
-</body>
-</html>
+        playing = true;
