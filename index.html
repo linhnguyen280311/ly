@@ -1,68 +1,66 @@
 <!doctype html>
-<html lang="vi">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Chúc mừng 20/10</title>
   <style>
-    :root{--bg:#f0fff9;--accent:#009e73;--text:#1f3b2d}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{background:radial-gradient(circle at 20% 20%, #f6fffb 0%, var(--bg) 35%), linear-gradient(180deg,#fff 0%, #f0fff9 100%);color:var(--text);display:flex;align-items:center;justify-content:center}
-    .card{width:min(980px,94vw);height:100vh;width:100vw;box-sizing:border-box;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.3));backdrop-filter:blur(6px);border-radius:0;padding:36px 28px;box-shadow:none;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;padding-top:80px}
-    h1{font-size:58px;margin:0 0 20px 0;color:var(--accent);letter-spacing:1px}
-    p.lead{margin:0 0 20px 0;font-size:20px;animation:rainbow 5s linear infinite;}
-    @keyframes rainbow{
-      0%{color:#e6194B}
-      14%{color:#f58231}
-      28%{color:#ffe119}
-      42%{color:#bfef45}
-      57%{color:#3cb44b}
-      71%{color:#42d4f4}
-      85%{color:#4363d8}
-      100%{color:#e6194B}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial;
+      background: #f0fff9;
+      text-align: center;
     }
-    /* falling flowers */
-    .flower{position:absolute;top:-10%;left:50%;width:20px;height:20px;background:radial-gradient(circle,#ffe6f0 20%,#ff99cc 80%);border-radius:50%;opacity:0.9}
-    @keyframes fall{0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}}
-    @media (max-width:520px){h1{font-size:40px} .card{padding:20px;padding-top:60px}}
+    h1 {
+      color: #e91e63;
+      margin-top: 20%;
+    }
+    #playBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #009e73;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    #playBtn:hover {
+      background: #007a58;
+    }
   </style>
 </head>
 <body>
-  <div class="card" id="card">
-    <h1>Chúc mừng 20/10</h1>
-    <p class="lead">Chúc toàn thể các bạn nữ trong lớp 9B và cô giáo chủ nhiệm có một ngày 20/10 thật nhiều niềm vui, sức khỏe và hạnh phúc! 🌹</p>
-  </div>
+  <h1>💐 Chúc mừng ngày 20/10 💐</h1>
+  <p>Chúc các bạn nữ trong lớp luôn vui vẻ, xinh đẹp và hạnh phúc!</p>
 
-  <audio id="bg-music" src="nhac.mp3" autoplay loop></audio>
+  <!-- Nhạc -->
+  <audio id="music" loop>
+    <source src="nhac.mp3" type="audio/mpeg">
+  </audio>
+  <button id="playBtn">🎶 Bật nhạc</button>
 
   <script>
-    // auto full screen ngay khi tải
-    window.addEventListener('load', async ()=>{
-      try{
-        if(!document.fullscreenElement) await document.documentElement.requestFullscreen();
-        // phát nhạc tự động
-        const music = document.getElementById('bg-music');
-        music.play().catch(e=>console.log("Không thể tự động phát nhạc:", e.message));
-      }catch(e){console.log('Không thể tự động full màn hình:', e.message)}
+    var audio = document.getElementById("music");
+    var btn = document.getElementById("playBtn");
+
+    // Thử autoplay khi load trang
+    window.addEventListener("load", function() {
+      audio.play().catch(() => {
+        console.log("Trình duyệt chặn autoplay, cần click nút.");
+      });
     });
 
-    // generate flowers
-    function makeFlower(){
-      const f = document.createElement('div');
-      f.className = 'flower';
-      const size = Math.random()*16 + 12;
-      f.style.width = size+'px'; f.style.height = size+'px';
-      f.style.left = Math.random()*100+'%';
-      f.style.top = (Math.random()*-20)+'%';
-      f.style.opacity = (0.6 + Math.random()*0.4);
-      f.style.transform = 'rotate('+ (Math.random()*360) +'deg)';
-      const dur = 6 + Math.random()*8;
-      f.style.animation = `fall ${dur}s linear forwards`;
-      document.body.appendChild(f);
-      setTimeout(()=>f.remove(), (dur+1)*1000);
-    }
-    setInterval(makeFlower, 600);
-
+    // Nút phát nhạc
+    btn.addEventListener("click", function() {
+      if (audio.paused) {
+        audio.play();
+        btn.innerText = "⏸ Tạm dừng";
+      } else {
+        audio.pause();
+        btn.innerText = "🎶 Bật nhạc";
+      }
+    });
   </script>
 </body>
 </html>
