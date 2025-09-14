@@ -31,13 +31,13 @@
       position: fixed;
       bottom: 15px;
       right: 15px;
-      width: 10px;
-      height: 10px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       border: none;
       background-color: black;
       color: white;
-      font-size: 6px;
+      font-size: 12px;
       cursor: pointer;
       z-index: 9999;
       padding: 0;
@@ -59,6 +59,31 @@
     let playing = false;
 
     btn.addEventListener('click', ()=>{
-      if(!playing){
-        music.play();
+      if(playing){
+        music.pause();
+        playing = false;
+      }else{
+        music.play().catch(e=>console.log("Không phát được nhạc:", e.message));
         playing = true;
+      }
+    });
+
+    // generate flowers
+    function makeFlower(){
+      const f = document.createElement('div');
+      f.className = 'flower';
+      const size = Math.random()*16 + 12;
+      f.style.width = size+'px'; f.style.height = size+'px';
+      f.style.left = Math.random()*100+'%';
+      f.style.top = (Math.random()*-20)+'%';
+      f.style.opacity = (0.6 + Math.random()*0.4);
+      f.style.transform = 'rotate('+ (Math.random()*360) +'deg)';
+      const dur = 6 + Math.random()*8;
+      f.style.animation = `fall ${dur}s linear forwards`;
+      document.body.appendChild(f);
+      setTimeout(()=>f.remove(), (dur+1)*1000);
+    }
+    setInterval(makeFlower, 600);
+  </script>
+</body>
+</html>
