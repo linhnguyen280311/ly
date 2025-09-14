@@ -11,7 +11,7 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
     }
     body{
-      background: url("lop.jpg") no-repeat center center/cover;
+      background-color: #d88a92; /* màu hồng như trong ảnh bạn gửi */
       color:var(--text);
       display:flex;
       align-items:center;
@@ -21,8 +21,8 @@
       width:min(980px,94vw);
       height:100vh;width:100vw;
       box-sizing:border-box;
-      background:rgba(0,0,0,0.4); /* nền mờ để nhìn rõ chữ */
-      backdrop-filter:blur(2px);
+      background:rgba(255,255,255,0.15); /* nền sáng để chữ dễ nhìn */
+      backdrop-filter:blur(1px);
       border-radius:0;
       padding:36px 28px;
       box-shadow:none;
@@ -36,19 +36,32 @@
       padding-top:80px;
     }
     h1{font-size:58px;margin:0 0 20px 0;color:var(--accent);letter-spacing:1px}
-    p.lead{margin:0 0 20px 0;font-size:20px;animation:rainbow 5s linear infinite;}
-    @keyframes rainbow{
-      0%{color:#e6194B}
-      14%{color:#f58231}
-      28%{color:#ffe119}
-      42%{color:#bfef45}
-      57%{color:#3cb44b}
-      71%{color:#42d4f4}
-      85%{color:#4363d8}
-      100%{color:#e6194B}
+    p.lead{margin:0 0 20px 0;font-size:20px;}
+
+    /* hiệu ứng chữ trắng nhấp nháy */
+    .blink-white {
+      color:white;
+      animation: blink 1.5s infinite;
     }
-    .flower{position:absolute;top:-10%;left:50%;width:20px;height:20px;background:radial-gradient(circle,#ffe6f0 20%,#ff99cc 80%);border-radius:50%;opacity:0.9}
-    @keyframes fall{0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}}
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* trái tim rơi */
+    .heart {
+      position:absolute;
+      top:-10%;
+      color:#ffb6c1; /* hồng nhạt */
+      font-size:20px;
+      opacity:0.9;
+      animation: fall linear forwards;
+    }
+    @keyframes fall{
+      0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}
+      100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}
+    }
+
     @media (max-width:520px){h1{font-size:40px} .card{padding:20px;padding-top:60px}}
     #music-btn {
       position: fixed;
@@ -75,7 +88,9 @@
 <body>
   <div class="card" id="card">
     <h1>Chúc mừng 20/10</h1>
-    <p class="lead" style="color:pink">Thay mặt toàn thể các bạn nam trong lớp chúng tớ xin chúc các bạn nữ và cô giáo của chúng em một ngày 20/10 tràn ngập niềm vui,hạnh phúc và ý nghĩa. Chúng tớ mong các cậu cũng như là cô giáo luôn đồng hành cùng chúng tớ trên quãng đường còn lại ! 🌹 ❤️</p>
+    <p class="lead blink-white">
+      Thay mặt toàn thể các bạn nam trong lớp chúng tớ xin chúc các bạn nữ và cô giáo của chúng em một ngày 20/10 tràn ngập niềm vui,hạnh phúc và ý nghĩa. Chúng tớ mong các cậu cũng như là cô giáo luôn đồng hành cùng chúng tớ trên quãng đường còn lại ! 🌹 ❤️
+    </p>
   </div>
 
   <audio id="bg-music" src="nhac.mp3" loop></audio>
@@ -96,21 +111,21 @@
       playing = !playing;
     });
 
-    function makeFlower(){
-      const f = document.createElement('div');
-      f.className = 'flower';
-      const size = Math.random()*16 + 12;
-      f.style.width = size+'px'; f.style.height = size+'px';
-      f.style.left = Math.random()*100+'%';
-      f.style.top = (Math.random()*-20)+'%';
-      f.style.opacity = (0.6 + Math.random()*0.4);
-      f.style.transform = 'rotate('+ (Math.random()*360) +'deg)';
+    function makeHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = '❤';
+      const size = Math.random()*16 + 14;
+      h.style.fontSize = size+'px';
+      h.style.left = Math.random()*100+'%';
+      h.style.top = (Math.random()*-20)+'%';
+      h.style.opacity = (0.6 + Math.random()*0.4);
       const dur = 6 + Math.random()*8;
-      f.style.animation = `fall ${dur}s linear forwards`;
-      document.body.appendChild(f);
-      setTimeout(()=>f.remove(), (dur+1)*1000);
+      h.style.animationDuration = dur+'s';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), (dur+1)*1000);
     }
-    setInterval(makeFlower, 600);
+    setInterval(makeHeart, 600);
   </script>
 </body>
 </html>
