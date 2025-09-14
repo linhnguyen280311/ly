@@ -52,7 +52,7 @@
 <body>
   <div class="card" id="card">
     <h1>Chúc mừng 20/10</h1>
-    <p class="lead">Chúc toàn thể các bạn nữ trong lớp 9B và cô giáo chủ nhiệm có một ngày 20/10 thật nhiều niềm vui, sức khỏe và hạnh phúc! 🌹</p>
+    <p class="lead">Thay mặt toàn thể các bạn nam trong lớp chúng tớ xin chúc các bạn nữ và cô giáo của chúng em một ngày 20/10 tràn ngập niềm vui,hạnh phúc và ý nghĩa.Chúng tớ mong các cậu cũng như là cô giáo luôn đồng hành cùng chúng tớ trên quãng đường còn lại ! 🌹 ❤️</p>
   </div>
 
   <!-- file nhạc -->
