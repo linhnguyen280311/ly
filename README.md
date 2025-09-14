@@ -24,52 +24,63 @@
     /* falling flowers */
     .flower{position:absolute;top:-10%;left:50%;width:20px;height:20px;background:radial-gradient(circle,#ffe6f0 20%,#ff99cc 80%);border-radius:50%;opacity:0.9}
     @keyframes fall{0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}}
-    /* controls */
-    .controls{position:absolute;right:18px;bottom:14px;display:flex;gap:8px;align-items:center}
-    .btn{background:rgba(255,255,255,0.8);border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:999px;cursor:pointer;font-weight:600;backdrop-filter:blur(4px)}
-    .btn:active{transform:translateY(1px)}
-    .music-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;}
     @media (max-width:520px){h1{font-size:40px} .card{padding:20px;padding-top:60px}}
+
+    /* nút nhạc màu đen nhỏ */
+    #music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-color: black;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+      z-index: 9999;
+    }
+    #music-btn:hover {
+      transform: scale(1.1);
+      background-color: #333;
+    }
   </style>
 </head>
 <body>
   <div class="card" id="card">
     <h1>Chúc mừng 20/10</h1>
     <p class="lead">Chúc toàn thể các bạn nữ trong lớp 9B và cô giáo chủ nhiệm có một ngày 20/10 thật nhiều niềm vui, sức khỏe và hạnh phúc! 🌹</p>
-
-    <div class="controls">
-      <button class="btn music-btn" id="toggleMusic" title="Phát / Tắt nhạc">▶</button>
-    </div>
   </div>
 
-  <!-- background music (replace src with your file) -->
-  <audio id="bgm" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d3d6c3a1df.mp3?filename=romantic-background-140079.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ thẻ audio.
-  </audio>
+  <!-- file nhạc -->
+  <audio id="bg-music" src="nhac.mp3" loop></audio>
+  <button id="music-btn">🎵</button>
 
   <script>
-    // music control
-    const bgm = document.getElementById('bgm');
-    const btn = document.getElementById('toggleMusic');
-    let playing = false;
-    btn.addEventListener('click', ()=>{
-      if(!playing){
-        bgm.play().catch(()=>{});
-        btn.textContent = '⏸';
-        playing = true;
-      } else {
-        bgm.pause();
-        btn.textContent = '▶';
-        playing = false;
-      }
-    });
-
     // auto full screen ngay khi tải
     window.addEventListener('load', async ()=>{
       try{
         if(!document.fullscreenElement) await document.documentElement.requestFullscreen();
       }catch(e){console.log('Không thể tự động full màn hình:', e.message)}
+    });
+
+    // điều khiển nhạc bằng nút
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-btn');
+    let playing = false;
+
+    btn.addEventListener('click', ()=>{
+      if(playing){
+        music.pause();
+        btn.textContent = "🎵";
+      }else{
+        music.play();
+        btn.textContent = "🔊";
+      }
+      playing = !playing;
     });
 
     // generate flowers
@@ -88,7 +99,6 @@
       setTimeout(()=>f.remove(), (dur+1)*1000);
     }
     setInterval(makeFlower, 600);
-
   </script>
 </body>
 </html>
