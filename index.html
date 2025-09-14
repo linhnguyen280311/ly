@@ -26,18 +26,18 @@
     @keyframes fall{0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}}
     @media (max-width:520px){h1{font-size:40px} .card{padding:20px;padding-top:60px}}
 
-    /* nút nhạc màu đen */
+    /* nút nhạc màu đen nhỏ */
     #music-btn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: none;
-      background-color: black; /* màu đen */
+      background-color: black;
       color: white;
-      font-size: 28px;
+      font-size: 20px;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       transition: transform 0.2s;
@@ -55,6 +55,7 @@
     <p class="lead">Chúc toàn thể các bạn nữ trong lớp 9B và cô giáo chủ nhiệm có một ngày 20/10 thật nhiều niềm vui, sức khỏe và hạnh phúc! 🌹</p>
   </div>
 
+  <!-- file nhạc -->
   <audio id="bg-music" src="nhac.mp3" loop></audio>
   <button id="music-btn">🎵</button>
 
