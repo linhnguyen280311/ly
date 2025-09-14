@@ -5,10 +5,36 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Chúc mừng 20/10</title>
   <style>
-    :root{--bg:#f0fff9;--accent:#009e73;--text:#1f3b2d}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{background:radial-gradient(circle at 20% 20%, #f6fffb 0%, var(--bg) 35%), linear-gradient(180deg,#fff 0%, #f0fff9 100%);color:var(--text);display:flex;align-items:center;justify-content:center}
-    .card{width:min(980px,94vw);height:100vh;width:100vw;box-sizing:border-box;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.3));backdrop-filter:blur(6px);border-radius:0;padding:36px 28px;box-shadow:none;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;padding-top:80px}
+    :root{--accent:#009e73;--text:#fff}
+    html,body{
+      height:100%;margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    }
+    body{
+      background: url("lop.jpg") no-repeat center center/cover;
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .card{
+      width:min(980px,94vw);
+      height:100vh;width:100vw;
+      box-sizing:border-box;
+      background:rgba(0,0,0,0.4); /* nền mờ để nhìn rõ chữ */
+      backdrop-filter:blur(2px);
+      border-radius:0;
+      padding:36px 28px;
+      box-shadow:none;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      align-items:center;
+      text-align:center;
+      padding-top:80px;
+    }
     h1{font-size:58px;margin:0 0 20px 0;color:var(--accent);letter-spacing:1px}
     p.lead{margin:0 0 20px 0;font-size:20px;animation:rainbow 5s linear infinite;}
     @keyframes rainbow{
@@ -21,23 +47,20 @@
       85%{color:#4363d8}
       100%{color:#e6194B}
     }
-    /* falling flowers */
     .flower{position:absolute;top:-10%;left:50%;width:20px;height:20px;background:radial-gradient(circle,#ffe6f0 20%,#ff99cc 80%);border-radius:50%;opacity:0.9}
     @keyframes fall{0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}}
     @media (max-width:520px){h1{font-size:40px} .card{padding:20px;padding-top:60px}}
-
-    /* nút nhạc màu đen nhỏ */
     #music-btn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 40px;
-      height: 40px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       border: none;
       background-color: black;
       color: white;
-      font-size: 20px;
+      font-size: 14px;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       transition: transform 0.2s;
@@ -52,19 +75,16 @@
 <body>
   <div class="card" id="card">
     <h1>Chúc mừng 20/10</h1>
-    <p class="lead">Thay mặt toàn thể các bạn nam trong lớp chúng tớ xin chúc các bạn nữ và cô giáo của chúng em một ngày 20/10 tràn ngập niềm vui,hạnh phúc và ý nghĩa.Chúng tớ mong các cậu cũng như là cô giáo luôn đồng hành cùng chúng tớ trên quãng đường còn lại ! 🌹 ❤️</p>
+    <p class="lead" style="color:pink">Thay mặt toàn thể các bạn nam trong lớp chúng tớ xin chúc các bạn nữ và cô giáo của chúng em một ngày 20/10 tràn ngập niềm vui,hạnh phúc và ý nghĩa. Chúng tớ mong các cậu cũng như là cô giáo luôn đồng hành cùng chúng tớ trên quãng đường còn lại ! 🌹 ❤️</p>
   </div>
 
-  <!-- file nhạc -->
   <audio id="bg-music" src="nhac.mp3" loop></audio>
   <button id="music-btn">🎵</button>
 
   <script>
-    // điều khiển nhạc bằng nút
     const music = document.getElementById('bg-music');
     const btn = document.getElementById('music-btn');
     let playing = false;
-
     btn.addEventListener('click', ()=>{
       if(playing){
         music.pause();
@@ -76,7 +96,6 @@
       playing = !playing;
     });
 
-    // generate flowers
     function makeFlower(){
       const f = document.createElement('div');
       f.className = 'flower';
@@ -95,3 +114,4 @@
   </script>
 </body>
 </html>
+
