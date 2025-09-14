@@ -1,64 +1,76 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="vi">
 <head>
+  <meta charset="UTF-8">
   <title>Chúc mừng 20/10</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica Neue, Arial;
-      background: #f0fff9;
-      text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: pink;
+      overflow: hidden;
     }
     h1 {
-      color: #e91e63;
-      margin-top: 20%;
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbow 5s linear infinite;
     }
-    #playBtn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      background: #009e73;
-      color: white;
+    @keyframes rainbow {
+      to { background-position: 400% center; }
+    }
+    #music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      border: 2px solid #ff69b4;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: 0.3s;
     }
-    #playBtn:hover {
-      background: #007a58;
+    #music-btn:hover {
+      background: #ffb6c1;
     }
   </style>
 </head>
 <body>
-  <h1>💐 Chúc mừng ngày 20/10 💐</h1>
-  <p>Chúc các bạn nữ trong lớp luôn vui vẻ, xinh đẹp và hạnh phúc!</p>
+  <h1>Chúc toàn thể các bạn nữ lớp 9B cũng như cô giáo chủ nhiệm<br>
+  một ngày 20/10 vui vẻ, mạnh khỏe và hạnh phúc 💐</h1>
 
   <!-- Nhạc -->
-  <audio id="music" loop>
+  <audio id="bg-music" loop>
     <source src="nhac.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ phát nhạc.
   </audio>
-  <button id="playBtn">🎶 Bật nhạc</button>
+
+  <!-- Nút phát nhạc -->
+  <button id="music-btn">🎵</button>
 
   <script>
-    var audio = document.getElementById("music");
-    var btn = document.getElementById("playBtn");
+    const btn = document.getElementById('music-btn');
+    const music = document.getElementById('bg-music');
+    let playing = false;
 
-    // Thử autoplay khi load trang
-    window.addEventListener("load", function() {
-      audio.play().catch(() => {
-        console.log("Trình duyệt chặn autoplay, cần click nút.");
-      });
-    });
-
-    // Nút phát nhạc
-    btn.addEventListener("click", function() {
-      if (audio.paused) {
-        audio.play();
-        btn.innerText = "⏸ Tạm dừng";
+    btn.addEventListener('click', () => {
+      if (!playing) {
+        music.play();
+        playing = true;
+        btn.textContent = "⏸";
       } else {
-        audio.pause();
-        btn.innerText = "🎶 Bật nhạc";
+        music.pause();
+        playing = false;
+        btn.textContent = "🎵";
       }
     });
   </script>
