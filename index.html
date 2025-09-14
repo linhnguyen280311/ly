@@ -26,21 +26,26 @@
     @keyframes fall{0%{transform:translateY(-20vh) rotate(0) translateX(0);opacity:1}100%{transform:translateY(120vh) rotate(360deg) translateX(120px);opacity:0}}
     @media (max-width:520px){h1{font-size:40px} .card{padding:20px;padding-top:60px}}
 
-    /* nút nhạc */
+    /* nút nhạc màu đen nhỏ */
     #music-btn {
       position: fixed;
-      bottom: 15px;
-      right: 15px;
-      width: 25px;
-      height: 25px;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: none;
       background-color: black;
       color: white;
-      font-size: 12px;
+      font-size: 20px;
       cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
       z-index: 9999;
-      padding: 0;
+    }
+    #music-btn:hover {
+      transform: scale(1.1);
+      background-color: #333;
     }
   </style>
 </head>
@@ -50,10 +55,12 @@
     <p class="lead">Chúc toàn thể các bạn nữ trong lớp 9B và cô giáo chủ nhiệm có một ngày 20/10 thật nhiều niềm vui, sức khỏe và hạnh phúc! 🌹</p>
   </div>
 
+  <!-- file nhạc -->
   <audio id="bg-music" src="nhac.mp3" loop></audio>
   <button id="music-btn">🎵</button>
 
   <script>
+    // điều khiển nhạc bằng nút
     const music = document.getElementById('bg-music');
     const btn = document.getElementById('music-btn');
     let playing = false;
@@ -61,11 +68,12 @@
     btn.addEventListener('click', ()=>{
       if(playing){
         music.pause();
-        playing = false;
+        btn.textContent = "🎵";
       }else{
-        music.play().catch(e=>console.log("Không phát được nhạc:", e.message));
-        playing = true;
+        music.play();
+        btn.textContent = "🔊";
       }
+      playing = !playing;
     });
 
     // generate flowers
