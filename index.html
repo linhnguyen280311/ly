@@ -70,4 +70,39 @@
   <div class="card" id="card">
     <h1>Chúc mừng 20/10</h1>
     <p class="lead blink-white">
-      Thay mặt toàn thể các bạn nam trong lớp chúng tớ xin chúc các bạn nữ và cô giáo của chúng em một ngày 20/10 tràn ngập niềm vui,hạnh phú
+      Thay mặt toàn thể các bạn nam trong lớp chúng tớ xin chúc các bạn nữ và cô giáo của chúng em một ngày 20/10 tràn ngập niềm vui,hạnh phúc và ý nghĩa. Chúng tớ mong các cậu cũng như là cô giáo luôn đồng hành cùng chúng tớ trên quãng đường còn lại ! 🌹 ❤️
+    </p>
+  </div>
+
+  <audio id="bg-music" src="nhac.mp3" loop></audio>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    let started = false;
+
+    // phát nhạc khi click vào bất kỳ chỗ nào
+    document.addEventListener('click', ()=>{
+      if(!started){
+        music.play();
+        started = true;
+      }
+    });
+
+    function makeHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = '❤';
+      const size = Math.random()*16 + 14;
+      h.style.fontSize = size+'px';
+      h.style.left = Math.random()*100+'%';
+      h.style.top = (Math.random()*-20)+'%';
+      h.style.opacity = (0.6 + Math.random()*0.4);
+      const dur = 6 + Math.random()*8;
+      h.style.animationDuration = dur+'s';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), (dur+1)*1000);
+    }
+    setInterval(makeHeart, 600);
+  </script>
+</body>
+</html>
